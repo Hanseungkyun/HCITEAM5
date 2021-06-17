@@ -147,6 +147,8 @@ namespace HCITEAM5
                 textBox_starfig.Text = "★★★★★";
                 textBox_estimatedTime.Text = "10분";
             }
+            else
+                setNull();
             set_cond_time(textBox_estimatedTime.Text);
         }
         */
