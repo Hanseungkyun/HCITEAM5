@@ -152,7 +152,7 @@ namespace HCITEAM5
             this.textBox_estimatedTime.Name = "textBox_estimatedTime";
             this.textBox_estimatedTime.Size = new System.Drawing.Size(100, 28);
             this.textBox_estimatedTime.TabIndex = 26;
-            this.textBox_estimatedTime.Text = "5분";
+            this.textBox_estimatedTime.Text = "0분";
             this.textBox_estimatedTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_estimatedTime.TextChanged += new System.EventHandler(this.textBox_estimatedTime_TextChanged);
             // 
@@ -360,7 +360,7 @@ namespace HCITEAM5
             this.textBox_foodCondition.ReadOnly = true;
             this.textBox_foodCondition.Size = new System.Drawing.Size(100, 28);
             this.textBox_foodCondition.TabIndex = 16;
-            this.textBox_foodCondition.Text = "최상";
+            this.textBox_foodCondition.Text = "?";
             this.textBox_foodCondition.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_foodCondition

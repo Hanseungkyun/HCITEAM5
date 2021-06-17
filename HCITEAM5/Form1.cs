@@ -69,20 +69,19 @@ namespace HCITEAM5
 
         private void comboBox_foodType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBox_restaurnt.SelectedItem = null;
             string selectedFoodtype = (string)comboBox_foodType.SelectedItem;
-            int resultIndex = -1;
             ComboBox comboBox = (ComboBox)sender;
-            resultIndex = comboBox_foodType.FindStringExact(selectedFoodtype);
-            rest_addIndex(resultIndex);
+            int foodTypeIndex = comboBox_foodType.FindStringExact(selectedFoodtype);
+            rest_addIndex(foodTypeIndex);
         }
         private void comboBox_restaurnt_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_foodName.SelectedItem = null;
             string selectedrestaurnt = (string)comboBox_restaurnt.SelectedItem;
-            int resultIndex = -1;
             ComboBox comboBox = (ComboBox)sender;
-            resultIndex = comboBox_restaurnt.FindStringExact(selectedrestaurnt);
-            foodName_addIndex(resultIndex);
+            int restaurntIndex = comboBox_restaurnt.FindStringExact(selectedrestaurnt);
+            foodName_addIndex(restaurntIndex);
         }
 
         /*
@@ -176,13 +175,23 @@ namespace HCITEAM5
                 textBox_starfig.Text = "★★★★★";
                 textBox_estimatedTime.Text = "15분";
             }
+            else
+                setNull();
             set_cond_time(textBox_estimatedTime.Text);
         }
-
-        private void rest_addIndex(int resultIndex)
+        private void setNull()
+        {
+            textBox_price.Text = "0원";
+            textBox_star.Text = "0점";
+            textBox_starfig.Text = "☆☆☆☆☆";
+            textBox_estimatedTime.Text = "0분";
+            textBox_condfig.Text = "☆☆☆☆☆";
+            textBox_foodCondition.Text = "?";
+        }
+        private void rest_addIndex(int foodTypeIndex)
         {
             comboBox_restaurnt.Items.Clear();
-            switch (resultIndex)
+            switch (foodTypeIndex)
             {
                 case 0:     // 한식
                     comboBox_restaurnt.Items.AddRange(new object[] {
@@ -199,41 +208,45 @@ namespace HCITEAM5
                         "음식점C" });
                     comboBox_restaurnt.SelectedIndex = 0;
                     break;
-
             }
         }
-        private void foodName_addIndex(int resultIndex)
+        private void foodName_addIndex(int restaurntIndex)
         {
             comboBox_foodName.Items.Clear();
-
-            switch (resultIndex)
+            if (comboBox_foodType.SelectedIndex == 7) // 중식
             {
-                case 0:     // 음식점A   = 거리 5분
-                    comboBox_foodName.Items.AddRange(new object[] {
+                switch (restaurntIndex)
+                {
+                    case 0:     // 음식점A   = 거리 5분
+                        comboBox_foodName.Items.AddRange(new object[] {
                         "짜장면",
                         "짬뽕",
                         "탕수육"});
-                    break;
-                case 1:     // 음식점B   = 거리 10분
-                    comboBox_foodName.Items.AddRange(new object[] {
+                        comboBox_foodName.SelectedIndex = 0;
+                        break;
+                    case 1:     // 음식점B   = 거리 10분
+                        comboBox_foodName.Items.AddRange(new object[] {
                         "짜장면",
                         "짬뽕",
                         "탕수육"});
-                    break;
-                case 2:     // 음식점C   = 거리 15분
-                    comboBox_foodName.Items.AddRange(new object[] {
+                        comboBox_foodName.SelectedIndex = 0;
+                        break;
+                    case 2:     // 음식점C   = 거리 15분
+                        comboBox_foodName.Items.AddRange(new object[] {
                         "짜장면",
                         "짬뽕",
                         "탕수육"});
-                    break;
+                        comboBox_foodName.SelectedIndex = 0;
+                        break;
+                }
             }
         }
-        void set_cond_time(string estimatedTime)
+        private void set_cond_time(string estimatedTime)
         {
             int time = extract_number(estimatedTime);
             checkfood_and_setCond(time);
         }
-        void checkfood_and_setCond(int time)
+        private void checkfood_and_setCond(int time)
         {
             if (comboBox_foodName.Text == "짜장면")
             {
@@ -264,7 +277,7 @@ namespace HCITEAM5
                 }
             }
         }
-        int extract_number(string estimatedTime)
+        private int extract_number(string estimatedTime)
         {
             int time = 0;
             for (int i = 0; i < estimatedTime.Length; i++)
